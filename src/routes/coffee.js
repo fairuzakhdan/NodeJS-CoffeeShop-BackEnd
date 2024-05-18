@@ -1,12 +1,14 @@
 const express = require('express');
 
-const router = express.Router();
+const router = express();
 const coffeeController = require('../controller/coffee');
+const verifyToken = require('../middleware/verifyToken');
+const role = require('../middleware/role');
 
-router.get('/', coffeeController.getAllCoffee);
-router.post('/', coffeeController.createCoffee);
-router.get('/:idCoffee', coffeeController.getCoffeeById);
-router.patch('/:idCoffee', coffeeController.updateCoffeeById);
-router.delete('/:idCoffee', coffeeController.deleteCoffeById);
+router.get('/', verifyToken, coffeeController.getAllCoffee);
+router.post('/', verifyToken, role, coffeeController.createCoffee);
+router.get('/:idCoffee', verifyToken, coffeeController.getCoffeeById);
+router.patch('/:idCoffee', verifyToken, role, coffeeController.updateCoffeeById);
+router.delete('/:idCoffee', verifyToken, role, coffeeController.deleteCoffeById);
 
 module.exports = router;

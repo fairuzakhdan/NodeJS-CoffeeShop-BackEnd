@@ -6,7 +6,7 @@ const getAllCoffee = () => {
 };
 
 const createCoffee = (body) => {
-  const sql = `INSERT INTO coffee (namaCoffee,priceCoffee) VALUES ('${body.namaCoffee}','${body.priceCoffee}')`;
+  const sql = `INSERT INTO coffee (namaCoffee,priceCoffee) VALUES ('${body.namaCoffee}',${body.priceCoffee})`;
   return dbPool.execute(sql);
 };
 
